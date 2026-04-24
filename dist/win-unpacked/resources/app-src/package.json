@@ -1,0 +1,16 @@
+{
+  "name": "controle-de-acesso",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "author": "Guilherme Tomaz",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "better-sqlite3": "^12.5.0",
+    "cors": "^2.8.5",
+    "dayjs": "^1.11.19",
+    "exceljs": "^4.4.0",
+    "express": "^5.2.1"
+  }
+}

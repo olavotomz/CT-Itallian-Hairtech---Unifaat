@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Controle de Acesso Itallian Hairtech</title>
+    <link rel="stylesheet" href="/styles.css?v=1.0.0" />
+</head>
+
+<body>
+    <header>
+        <h1>Controle de Acesso</h1>
+        <div class="acoes">
+            <button id="alternar-configuracao" title="Configurações">⚙️</button>
+            <button id="botao-sair" title="Sair">Sair</button>
+        </div>
+    </header>
+
+    <main>
+        <section id="configuracao" class="oculto">
+            <h2>Configurações</h2>
+            <div class="grade">
+                <label>
+            Pasta raiz do Excel
+            <input id="raiz-excel" placeholder="Ex: C:\\Relatorios\\Acesso" readonly />
+          </label>
+            </div>
+            <div class="acoes">
+                <button id="selecionar-pasta">Selecionar pasta</button>
+                <button id="salvar-config">Salvar</button>
+            </div>
+            <span id="status-configuracao" class="estado"></span>
+        </section>
+        <section id="secao-cadastro">
+            <button type="button" id="alternar-cadastro" class="alternar-secao">Cadastrar Pessoa</button>
+            <form id="formulario-cadastro" class="oculto">
+                <div class="grade">
+                    <label>
+              Tipo
+              <select name="tipo" required>
+                <option value="funcionario">Funcionário</option>
+                <option value="visitante">Visitante</option>
+              </select>
+            </label>
+                    <label>
+              Nome
+              <input name="nome" required />
+            </label>
+                    <label>
+              Contato
+              <input name="contato" inputmode="numeric" pattern="[0-9]*" />
+            </label>
+                    <label>
+              CPF
+              <input name="cpf" required inputmode="numeric" pattern="[0-9]*" />
+            </label>
+                    <label>
+              Veículo
+              <select name="tem_veiculo" id="tem_veiculo">
+                <option value="1">Com veículo</option>
+                <option value="0">Sem veículo</option>
+              </select>
+            </label>
+                    <label>
+              Marca do veículo
+              <input name="veiculo_marca" data-veiculo />
+            </label>
+                    <label>
+              Modelo do veículo
+              <input name="veiculo_modelo" data-veiculo />
+            </label>
+                    <label>
+              Cor do veículo
+              <input name="veiculo_cor" data-veiculo />
+            </label>
+                    <label>
+              Placa
+              <input name="placa" data-veiculo />
+            </label>
+                    <label>
+              Departamento
+              <input name="departamento" />
+            </label>
+                </div>
+                <button type="submit" id="botaocad">Cadastrar</button>
+                <span id="status-cadastro" class="estado"></span>
+            </form>
+        </section>
+
+        <section id="secao-pessoas">
+            <div class="linha-cabecalho">
+                <h2>Pessoas</h2>
+                <input id="busca" placeholder="pesquisar por nome" />
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Nome</th>
+                        <th>CPF</th>
+                        <th>Veículo</th>
+                        <th>Placa</th>
+                        <th>Contato</th>
+                        <th>Departamento</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela-pessoas"></tbody>
+            </table>
+        </section>
+
+        <section id="secao-registros">
+            <div class="linha-cabecalho">
+                <h2>Entrada e Saída</h2>
+                <input id="busca-registros" placeholder="Buscar por nome" />
+                <button id="botao-filtro-registros" class="botao-icone" title="Filtros">🔎</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Tipo</th>
+                        <th>Entrada</th>
+                        <th>Saída</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela-registros"></tbody>
+            </table>
+        </section>
+    </main>
+    <div id="modal-diretorio" class="modal oculto">
+        <div class="conteudo-modal">
+            <div class="cabecalho-modal">
+                <h3>Selecionar pasta</h3>
+                <button id="fechar-diretorio">✖</button>
+            </div>
+            <div class="corpo-modal">
+                <div class="linha-caminho">
+                    <span id="diretorio-atual"></span>
+                    <button id="subir-diretorio">Voltar</button>
+                </div>
+                <ul id="lista-diretorios"></ul>
+            </div>
+            <div class="rodape-modal">
+                <button id="escolher-diretorio">Escolher esta pasta</button>
+            </div>
+        </div>
+    </div>
+    <div id="modal-filtro-registros" class="modal oculto">
+      <div class="conteudo-modal">
+        <div class="cabecalho-modal">
+          <h3>Filtros de logs</h3>
+          <button id="fechar-filtro-registros">✖</button>
+        </div>
+        <div class="corpo-modal">
+          <div class="grade">
+            <label>
+              Data inicial
+              <input id="registro-data-inicio" type="date" />
+            </label>
+            <label>
+              Data final
+              <input id="registro-data-fim" type="date" />
+            </label>
+          </div>
+        </div>
+        <div class="rodape-modal">
+          <button id="limpar-filtro-registros" class="secundario">Limpar</button>
+          <button id="aplicar-filtro-registros">Aplicar</button>
+        </div>
+      </div>
+    </div>
+    <div id="modal-edicao" class="modal oculto">
+      <div class="conteudo-modal">
+        <div class="cabecalho-modal">
+          <h3>Editar pessoa</h3>
+          <button id="fechar-edicao">✖</button>
+        </div>
+            <div class="corpo-modal">
+                <form id="formulario-edicao">
+                    <div class="grade">
+                        <label>
+                Tipo
+                <select name="tipo" required>
+                  <option value="funcionario">Funcionário</option>
+                  <option value="visitante">Visitante</option>
+                </select>
+              </label>
+                        <label>
+                Nome
+                <input name="nome" required />
+              </label>
+                        <label>
+                Contato
+                <input name="contato" inputmode="numeric" pattern="[0-9]*" />
+              </label>
+                        <label>
+                CPF
+                <input name="cpf" required inputmode="numeric" pattern="[0-9]*" />
+              </label>
+                        <label>
+                Veículo
+                <select name="tem_veiculo">
+                  <option value="1">Com veículo</option>
+                  <option value="0">Sem veículo</option>
+                </select>
+              </label>
+                        <label>
+                Marca do veículo
+                <input name="veiculo_marca" data-veiculo />
+              </label>
+                        <label>
+                Modelo do veículo
+                <input name="veiculo_modelo" data-veiculo />
+              </label>
+                        <label>
+                Cor do veículo
+                <input name="veiculo_cor" data-veiculo />
+              </label>
+                        <label>
+                Placa
+                <input name="placa" data-veiculo />
+              </label>
+                        <label>
+                Departamento
+                <input name="departamento" />
+              </label>
+                    </div>
+                </form>
+            </div>
+            <div class="rodape-modal">
+                <button id="salvar-edicao">Salvar</button>
+            </div>
+  </div>
+  </div>
+  <div id="modal-sair" class="modal oculto">
+      <div class="conteudo-modal">
+        <div class="cabecalho-modal">
+          <h3>Confirmar saída</h3>
+        </div>
+        <div class="corpo-modal">
+          <p>Deseja realmente sair?</p>
+        </div>
+        <div class="rodape-modal">
+          <button id="cancelar-sair">Cancelar</button>
+          <button id="confirmar-sair" class="perigo">Sair</button>
+        </div>
+      </div>
+    </div>
+    <script src="/app.js"></script>
+    
+    <footer>
+      <div style="background: linear-gradient(to right, #7ada63, #49b446);
+      color: white;
+      height: 60px;
+      padding: 4px 6px;
+      text-align: center;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;">
+        <h4>
+          Todos os direitos reservados ao grupo OG dessenvolvimento © 2025
+        </h4>
+      </div>
+    </footer>
+
+
+  </body>
+  </html>

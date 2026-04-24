@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - Controle de Acesso</title>
+  <link rel="stylesheet" href="/styles.css?v=1.0.0" />
+  <style>
+    html, body { height: 100%; }
+    body { display: flex; align-items: center; justify-content: center; background: linear-gradient(to right, #80d46b, #56b353); }
+    .auth-card { width: 420px; max-width: 95vw; background: #edfded; border-radius: 12px; box-shadow: 0 16px 40px rgba(0,0,0,0.25); overflow: hidden; }
+    .auth-header { display:flex; align-items:center; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid #e2e8f0; }
+    .auth-body { padding: 16px; display: grid; gap: 12px; }
+    .auth-actions { display:flex; justify-content: flex-end; gap: 8px; margin-top: 12px; }
+    .admin-panel { display:none; border-top: 1px solid #e2e8f0; padding: 12px 16px; }
+    .admin-panel.visible { display:block; }
+    .icon-btn { background-color: rgb(212, 32, 32);}
+    .icon-btn:hover { background: #ac0202}
+  </style>
+</head>
+<body>
+  <div class="auth-card">
+    <div class="auth-header">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <img src="/itallian.ico" alt="Itallian Hairtech" style="width:50px;height:50px;display:block;"/>
+        <h2>Acesso ao Sistema</h2>
+      </div>
+      <button id="power-close" class="icon-btn" title="Fechar">⏻</button>
+    </div>
+    <div class="auth-body">
+      <form id="login-form">
+        <label>
+          Usuário
+          <input name="usuario" required />
+        </label>
+        <label>
+          Senha
+          <input name="senha" type="password" required />
+        </label>
+        <div class="auth-actions">
+          <button type="submit">Entrar</button>
+          <button type="button" id="forgot-btn" class="secondary">Perdi minha senha</button>
+        </div>
+        <span id="login-status" class="status"></span>
+      </form>
+  </div>
+  <div id="forgot-modal" class="modal oculto">
+    <div class="conteudo-modal">
+      <div class="cabecalho-modal">
+        <h3>Perdi minha senha</h3>
+        <button id="forgot-close">✖</button>
+      </div>
+      <div class="corpo-modal">
+        <form id="admin-code-form">
+          <label>
+            Código de administrador
+            <input name="admin_code" type="password" required />
+          </label>
+          <div class="auth-actions">
+            <button type="submit">Validar código</button>
+          </div>
+          <span id="forgot-status" class="status"></span>
+        </form>
+        <div id="create-user" class="admin-panel">
+          <h3>Criar novo usuário</h3>
+          <form id="create-user-form">
+            <label>
+              Novo usuário
+              <input name="novo_usuario" required />
+            </label>
+            <label>
+              Senha
+              <input name="nova_senha" type="password" required />
+            </label>
+            <div class="auth-actions">
+              <button type="submit">Criar</button>
+            </div>
+            <span id="create-status" class="status"></span>
+          </form>
+        </div>
+      </div>
+      <div class="rodape-modal">
+        <button id="forgot-cancel">Fechar</button>
+      </div>
+    </div>
+  </div>
+  </div>
+  <script src="/login.js?v=1.0.1"></script>
+</body>
+</html>

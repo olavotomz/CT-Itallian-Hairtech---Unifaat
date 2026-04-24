@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard RH - Controle de Acesso</title>
+  <link rel="stylesheet" href="/styles.css?v=1.0.0" />
+</head>
+<body>
+  <header>
+    <h1>Dashboard RH</h1>
+    <div class="acoes">
+      <button id="botao-sair" title="Sair">Sair</button>
+    </div>
+  </header>
+  <main>
+    <section id="visao-geral">
+      <div class="linha-cabecalho">
+        <h2>Visão Geral</h2>
+        <button id="atualizar-visao-geral" class="botao-icone" title="Recarregar">↻</button>
+      </div>
+      <div class="grade">
+        <label>
+          Funcionários registrados
+          <input id="total-funcionarios" readonly />
+        </label>
+        <label>
+          Presentes agora
+          <input id="presentes" class="clickable-input" readonly title="Clique para ver nomes" />
+        </label>
+        <label>
+          Ausentes agora
+          <input id="ausentes" class="clickable-input" readonly title="Clique para ver nomes" />
+        </label>
+      </div>
+    </section>
+    <section id="secao-cadastro">
+      <h2>Cadastrar Pessoa</h2>
+      <form id="formulario-cadastro">
+        <div class="grade">
+          <label>
+            Tipo
+            <select name="tipo" required>
+              <option value="funcionario">Funcionário</option>
+              <option value="visitante">Visitante</option>
+            </select>
+          </label>
+          <label>
+            Nome
+            <input name="nome" required />
+          </label>
+          <label>
+            Contato
+            <input name="contato" inputmode="numeric" pattern="[0-9]*" />
+          </label>
+          <label>
+            CPF
+            <input name="cpf" required inputmode="numeric" pattern="[0-9]*" />
+          </label>
+          <label>
+            Veículo
+            <select name="tem_veiculo" id="tem_veiculo">
+              <option value="1">Com veículo</option>
+              <option value="0">Sem veículo</option>
+            </select>
+          </label>
+          <label>
+            Marca do veículo
+            <input name="veiculo_marca" data-veiculo />
+          </label>
+          <label>
+            Modelo do veículo
+            <input name="veiculo_modelo" data-veiculo />
+          </label>
+          <label>
+            Cor do veículo
+            <input name="veiculo_cor" data-veiculo />
+          </label>
+          <label>
+            Placa
+            <input name="placa" data-veiculo />
+          </label>
+          <label>
+            Departamento
+            <input name="departamento" />
+          </label>
+        </div>
+        <button type="submit" id="botaocad">Cadastrar</button>
+        <span id="status-cadastro" class="estado"></span>
+      </form>
+    </section>
+    <section id="secao-acoes">
+      <h2>Exportar para Excel</h2>
+      <div class="acoes">
+        <button id="abrir-exportacao">Exportar</button>
+      </div>
+    </section>
+    <section id="secao-registros">
+      <div class="linha-cabecalho">
+        <h2>Entrada e Saída</h2>
+        <input id="busca-registros" placeholder="Buscar por nome" />
+        <button id="botao-filtro-registros" class="botao-icone" title="Filtros">🔎</button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Tipo</th>
+            <th>Entrada</th>
+            <th>Saída</th>
+          </tr>
+        </thead>
+        <tbody id="tabela-registros"></tbody>
+      </table>
+    </section>
+  </main>
+  <div id="modal-exportacao" class="modal oculto">
+    <div class="conteudo-modal">
+      <div class="cabecalho-modal">
+        <h3>Gerar relatório</h3>
+        <button id="fechar-exportacao">✖</button>
+      </div>
+      <div class="corpo-modal">
+        <div class="grade">
+          <label>
+            Data inicial
+            <input id="exportar-data-inicio" type="date" />
+          </label>
+          <label>
+            Data final
+            <input id="exportar-data-fim" type="date" />
+          </label>
+        </div>
+      </div>
+      <div class="rodape-modal">
+        <button id="gerar-exportacao">Gerar Excel</button>
+      </div>
+    </div>
+  </div>
+  <div id="modal-filtro-registros" class="modal oculto">
+    <div class="conteudo-modal">
+      <div class="cabecalho-modal">
+        <h3>Filtros de registros</h3>
+        <button id="fechar-filtro-registros">✖</button>
+      </div>
+      <div class="corpo-modal">
+        <div class="grade">
+          <label>
+            Data inicial
+            <input id="registro-data-inicio" type="date" />
+          </label>
+          <label>
+            Data final
+            <input id="registro-data-fim" type="date" />
+          </label>
+        </div>
+      </div>
+      <div class="rodape-modal">
+        <button id="limpar-filtro-registros" class="secundario">Limpar</button>
+        <button id="aplicar-filtro-registros">Aplicar</button>
+      </div>
+    </div>
+  </div>
+  <div id="modal-nomes" class="modal oculto">
+    <div class="conteudo-modal">
+      <div class="cabecalho-modal">
+        <h3 id="titulo-modal-nomes">Lista de funcionários</h3>
+        <button id="fechar-modal-nomes">✖</button>
+      </div>
+      <div class="corpo-modal">
+        <ul id="lista-nomes" style="list-style: none; padding: 0; max-height: 400px; overflow-y: auto;"></ul>
+      </div>
+      <div class="rodape-modal">
+        <button id="ok-modal-nomes">OK</button>
+      </div>
+    </div>
+  </div>
+  <script src="/dashboard.js?v=1.0.3"></script>
+</body>
+</html>

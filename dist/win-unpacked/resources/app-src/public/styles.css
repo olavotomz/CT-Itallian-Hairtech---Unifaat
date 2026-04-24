@@ -1,0 +1,330 @@
+    * {
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+        margin: 0;
+        background: #dcfdd9;
+        color: #222;
+    }
+    
+    header {
+        background: linear-gradient(to right, #7ada63, #49b446);
+        color: rgb(255, 255, 255);
+        padding: 16px 24px;
+        text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+        border-bottom-right-radius: 15px;
+        border-bottom-left-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    header #alternar-configuracao {
+        background: transparent;
+        color: white;
+        font-size: 24px;
+        border: none;
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    header #botao-sair {
+        background: #dc2626;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        height: 40px;
+        padding: 0 14px;
+        cursor: pointer;
+    }
+
+    header #botao-sair:hover {
+        background: #b91c1c;
+    }
+    
+    main {
+        padding: 24px;
+        display: grid;
+        gap: 24px;
+    }
+    
+    section {
+        background: white;
+        border-radius: 8px;
+        padding: 16px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    #secao-cadastro.collapsed {
+        width: fit-content;
+        max-width: 320px;
+        justify-self: start;
+    }
+    
+    h1,
+    h2 {
+        margin: 0 0 12px;
+    }
+
+    .alternar-secao {
+        height: auto;
+        padding: 0;
+        background: transparent;
+        color: #222;
+        border-radius: 0;
+        font-size: 1.5em;
+        font-weight: 700;
+        text-align: left;
+        margin-bottom: 12px;
+    }
+
+    .alternar-secao:hover {
+        background: transparent;
+        color: #1a990f;
+    }
+    
+    .grade {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+    }
+    
+    label {
+        display: flex;
+        flex-direction: column;
+        font-size: 14px;
+        gap: 6px;
+    }
+    
+    input,
+    select {
+        height: 36px;
+        padding: 6px 8px;
+        border: 1px solid #cbd5e1;
+        border-radius: 6px;
+    }
+    
+    button {
+        height: 36px;
+        padding: 0 12px;
+        border: none;
+        background: #53bb5b;
+        color: white;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+    
+    #botaocad {
+        margin-top: 22px;
+    }
+    
+    button:hover {
+        background: #1a990f;
+    }
+    
+    .estado {
+        margin-left: 12px;
+        font-size: 12px;
+        color: #0a4fc0;
+    }
+    
+    .linha-cabecalho {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+    }
+    
+    .linha-cabecalho input {
+        width: 50%;
+    }
+    
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    
+    th,
+    td {
+        padding: 8px;
+        border-bottom: 1px solid #e2e8f0;
+        text-align: left;
+    }
+    
+    tbody tr:hover {
+        background: #f1f5f9;
+    }
+    
+    .acoes {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+    }
+    
+    .secundario {
+        background: #64748b;
+    }
+    
+    .secundario:hover {
+        background: #475569;
+    }
+    
+    .perigo {
+        background: #dc2626;
+    }
+    
+    .perigo:hover {
+        background: #b91c1c;
+    }
+    
+    .oculto {
+        display: none;
+    }
+    
+    .botao-icone {
+        width: 36px;
+        height: 36px;
+        padding: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+    }
+    .botao-icone svg { width: 20px; height: 20px; }
+    .botao-editar { background: #f59e0b; color: #fff; }
+    .botao-editar:hover { background: #d97706; }
+    #botao-filtro-registros { background: #ffffff; color: #0c5bd8; border: 1px solid #cbd5e1; }
+    #botao-filtro-registros:hover { background: #f8fafc; }
+    
+    .clickable-input {
+        cursor: pointer;
+        background-color: #f8fafc;
+    }
+    .clickable-input:hover {
+        background-color: #f1f5f9;
+        border-color: #53bb5b;
+    }
+    
+    .modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .modal.oculto {
+        display: none !important;
+    }
+    
+    .conteudo-modal {
+        background: white;
+        width: 600px;
+        max-width: 95vw;
+        border-radius: 8px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+    
+    .cabecalho-modal,
+    .rodape-modal {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 16px;
+        border-bottom: 1px solid #e2e8f0;
+    }
+    
+    .rodape-modal {
+        border-top: 1px solid #e2e8f0;
+        border-bottom: none;
+    }
+    
+    .corpo-modal {
+        padding: 12px 16px;
+    }
+    
+    .linha-caminho {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 8px;
+    }
+    
+    #lista-diretorios {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        max-height: 300px;
+        overflow: auto;
+    }
+    
+    #lista-diretorios li {
+        padding: 6px 8px;
+        border-bottom: 1px solid #e2e8f0;
+        cursor: pointer;
+    }
+    
+    #lista-diretorios li:hover {
+        background: #f1f5f9;
+    }
+    
+    @media (max-width: 900px) {
+        .grade {
+            grid-template-columns: 1fr;
+        }
+        .linha-cabecalho {
+            flex-direction: column;
+            align-items: stretch;
+        }
+    }
+    #modal-sair .conteudo-modal {
+        width: 360px;
+    }
+    #modal-sair .rodape-modal {
+        justify-content: flex-end;
+        gap: 8px;
+    }
+    #modal-sair .cabecalho-modal,
+    #modal-sair .rodape-modal {
+        padding: 8px 12px;
+    }
+    #modal-sair .corpo-modal {
+        padding: 8px 12px;
+    }
+    .login-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+    }
+    .login-overlay.oculto { display: none !important; }
+    .login-card {
+        background: #ffffff;
+        width: 380px;
+        max-width: 95vw;
+        border-radius: 10px;
+        box-shadow: 0 12px 28px rgba(0,0,0,0.2);
+        overflow: hidden;
+    }
+    .login-header,
+    .login-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 16px;
+        border-bottom: 1px solid #e2e8f0;
+    }
+    .login-body { padding: 12px 16px; }
+    .login-body form { display: grid; gap: 12px; }
+    .login-body .acoes { justify-content: flex-end; }
