@@ -1,0 +1,12 @@
+*.exe
+*.dll
+*.so
+*.dylib
+*.pak
+*.dat
+*.bin
+*.asar
+desktop.ini
+node_modules/
+.cache/
+*.db
